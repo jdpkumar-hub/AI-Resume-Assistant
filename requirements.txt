@@ -1,0 +1,6 @@
+streamlit
+openai
+stripe
+python-docx
+pdfplumber
+reportlab
