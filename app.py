@@ -120,15 +120,10 @@ with left:
     ### ✨ Features
 
     ✔ ATS Score Checker
-
     ✔ Resume Rewrite
-
     ✔ Interview Questions
-
     ✔ PDF Export
-
     ✔ AI Optimization
-
     ✔ Resume Templates
     """)
 
