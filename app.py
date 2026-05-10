@@ -40,8 +40,7 @@ left, right = st.columns([1, 3])
 # ================= LEFT PANEL =================
 with left:
 
-    st.image("images/logo.png", width=120)
-
+    st.image("images/logo.png", width=90)
     st.markdown("# 🚀 AI Resume")
     st.markdown("### Assistant")
 
@@ -82,3 +81,11 @@ with left:
     st.markdown("---")
 
     st.caption("© 2026 AI Resume Assistant")
+#==========================================
+    
+with right:
+
+    st.title("Welcome Back 👋")
+
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")    
