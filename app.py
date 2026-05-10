@@ -19,7 +19,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 stripe.api_key = st.secrets["STRIPE_SECRET_KEY"]
 PRICE_ID = st.secrets["PRICE_ID"]
-SUCCESS_URL = st.secrets["SUCCESS_URL"]
+SUCCESS_URL = st.secrets["APP_URL"]
 CANCEL_URL = st.secrets["CANCEL_URL"]
 
 USER_FILE = "users.json"
