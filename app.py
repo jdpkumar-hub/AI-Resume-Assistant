@@ -118,7 +118,12 @@ with left:
 
     st.markdown("""
     ### ✨ Features
-
+    <ul>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+      <li>Fourth item</li>
+    </ul>
     ✔ ATS Score Checker
     ✔ Resume Rewrite
     ✔ Interview Questions
