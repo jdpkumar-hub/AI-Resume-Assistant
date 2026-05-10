@@ -35,21 +35,21 @@ st.markdown("""
 
 
 # ================= LEFT PANEL =================
-    with left:
-        st.image("images/logo.png", width=160)
-#        st.markdown("## AI Resume")
-        st.markdown("### Assistant")
+with left:
+    st.image("images/logo.png", width=160)
+     st.markdown("## AI Resume")
+    st.markdown("### Assistant")
 
-        st.markdown("---")
+    st.markdown("---")
 
-        menu = st.radio(
-            "Navigation",
-            ["Login", "Register", "Reset Password"]
-        )
+    menu = st.radio(
+        "Navigation",
+        ["Login", "Register", "Reset Password"]
+    )
 
-        st.markdown("---")
+    st.markdown("---")
 
-        st.markdown("""
+    st.markdown("""
 ### ✨ Features
 
 ✔ ATS Score  
