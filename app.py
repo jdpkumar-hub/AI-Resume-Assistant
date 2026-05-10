@@ -14,6 +14,30 @@ from reportlab.lib.styles import getSampleStyleSheet
 # =============================
 st.set_page_config(page_title="AI Resume Assistant", layout="wide")
 
+st.markdown("""
+<style>
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(to right, #f8fafc, #eef2ff);
+}
+
+[data-testid="stVerticalBlock"] {
+    gap: 1rem;
+}
+
+.stButton button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 10px;
+    height: 45px;
+    border: none;
+}
+
+.stButton button:hover {
+    background-color: #1d4ed8;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # 🔐 USE ENV VARIABLES
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -109,49 +133,73 @@ if "success" in query_params and st.session_state.user:
 # =============================
 if not st.session_state.user:
 
-    st.title("🚀 AI Resume Assistant")
+    left, right = st.columns([1, 2])
 
-    st.markdown("""
-### Get Hired Faster with AI
+    # ================= LEFT PANEL =================
+    with left:
+        st.markdown("# 🚀")
+        st.markdown("## AI Resume")
+        st.markdown("### Assistant")
 
-✔ Resume Optimization  
-✔ ATS Score Analysis  
-✔ Interview Preparation  
-✔ AI Resume Rewrite  
+        st.markdown("---")
+
+        menu = st.radio(
+            "Navigation",
+            ["Login", "Register", "Reset Password"]
+        )
+
+        st.markdown("---")
+
+        st.markdown("""
+### ✨ Features
+
+✔ ATS Score  
+✔ Resume Rewrite  
+✔ Interview Questions  
+✔ PDF Download  
+✔ AI Optimization  
 """)
 
-    menu = st.radio("Choose", ["Login", "Register", "Reset Password"])
+    # ================= RIGHT PANEL =================
+    with right:
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+        st.markdown("## Welcome Back 👋")
 
-    if menu == "Login":
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
 
-        if st.button("Login"):
-            if login(username, password):
-                st.session_state.user = username
-                st.rerun()
-            else:
-                st.error("Invalid credentials")
+        if menu == "Login":
 
-    elif menu == "Register":
+            if st.button("Login", use_container_width=True):
+                if login(username, password):
+                    st.session_state.user = username
+                    st.rerun()
+                else:
+                    st.error("Invalid credentials")
 
-        if st.button("Register"):
-            if register(username, password):
-                st.success("Registered! Please login")
-            else:
-                st.error("User already exists")
+        elif menu == "Register":
 
-    elif menu == "Reset Password":
+            if st.button("Register", use_container_width=True):
+                if register(username, password):
+                    st.success("Registered successfully!")
+                else:
+                    st.error("User already exists")
 
-        new_password = st.text_input("New Password", type="password")
+        elif menu == "Reset Password":
 
-        if st.button("Reset Password"):
-            if reset_password(username, new_password):
-                st.success("Password updated successfully!")
-            else:
-                st.error("Username not found")
+            new_password = st.text_input(
+                "New Password",
+                type="password"
+            )
+
+            if st.button("Reset Password", use_container_width=True):
+                if reset_password(username, new_password):
+                    st.success("Password updated!")
+                else:
+                    st.error("Username not found")
+
     st.stop()
+
 # =============================
 # USER DATA
 # =============================
