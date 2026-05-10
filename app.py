@@ -137,7 +137,7 @@ if not st.session_state.user:
 
     # ================= LEFT PANEL =================
     with left:
-        st.images("image/logo.png", width=220)
+        st.image("images/logo.png", width=220)
         st.markdown("## AI Resume")
         st.markdown("### Assistant")
 
