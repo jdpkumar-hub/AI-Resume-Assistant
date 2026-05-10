@@ -112,23 +112,6 @@ with left:
     🚀 Smart Career Optimization
     </p>
     """, unsafe_allow_html=True)
-
-    st.markdown("---")
-
-    st.markdown("""
-    ### ✨ Features
-
-    ✔ ATS Score Checker  
-    ✔ Resume Rewrite  
-    ✔ Interview Questions  
-    ✔ PDF Export  
-    ✔ AI Optimization  
-    ✔ Resume Templates  
-    """)
-
-    st.markdown("<br><br>", unsafe_allow_html=True)
-
-    st.markdown("---")
 # ==========================================
 # DUMMY AUTH FUNCTIONS
 # Replace later with Supabase
@@ -166,6 +149,23 @@ if st.button("Reset Password"):
 
     else:
         st.error("User not found")
+    st.markdown("---")
+
+    st.markdown("""
+    ### ✨ Features
+
+    ✔ ATS Score Checker  
+    ✔ Resume Rewrite  
+    ✔ Interview Questions  
+    ✔ PDF Export  
+    ✔ AI Optimization  
+    ✔ Resume Templates  
+    """)
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    st.markdown("---")
+
 
     st.caption("Built by JDP Kumar 🚀")
 
