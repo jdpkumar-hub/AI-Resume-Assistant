@@ -88,43 +88,6 @@ header {
 if "user" not in st.session_state:
     st.session_state.user = None
 
-# ==========================================
-# DUMMY AUTH FUNCTIONS
-# Replace later with Supabase
-# ==========================================
-if st.button("Login"):
-
-    user = login_user(username, password)
-
-    if user:
-        st.session_state.user = user
-        st.success("Login successful ✅")
-        st.rerun()
-
-    else:
-        st.error("Invalid credentials")
-        
-
-if st.button("Create Account"):
-
-    if register_user(
-        reg_user,
-        reg_email,
-        reg_pass
-    ):
-        st.success("Registration successful ✅")
-
-    else:
-        st.error("User already exists")
-        
-        
-if st.button("Reset Password"):
-
-    if reset_password(reset_user, reset_pass):
-        st.success("Password updated ✅")
-
-    else:
-        st.error("User not found")
 
 # ==========================================
 # LAYOUT
@@ -166,6 +129,43 @@ with left:
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     st.markdown("---")
+# ==========================================
+# DUMMY AUTH FUNCTIONS
+# Replace later with Supabase
+# ==========================================
+if st.button("Login"):
+
+    user = login_user(username, password)
+
+    if user:
+        st.session_state.user = user
+        st.success("Login successful ✅")
+        st.rerun()
+
+    else:
+        st.error("Invalid credentials")
+        
+
+if st.button("Create Account"):
+
+    if register_user(
+        reg_user,
+        reg_email,
+        reg_pass
+    ):
+        st.success("Registration successful ✅")
+
+    else:
+        st.error("User already exists")
+        
+        
+if st.button("Reset Password"):
+
+    if reset_password(reset_user, reset_pass):
+        st.success("Password updated ✅")
+
+    else:
+        st.error("User not found")
 
     st.caption("Built by JDP Kumar 🚀")
 
