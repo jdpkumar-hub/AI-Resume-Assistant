@@ -17,14 +17,10 @@ st.set_page_config(page_title="AI Resume Assistant", layout="wide")
 # 🔐 USE ENV VARIABLES
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-#stripe.api_key = st.secrets("STRIPE_SECRET_KEY")
-
-stripe.api_key = "sk_test_51N4p48BgrmpYhuw1VRwOEAa0g1IlB4UKwiCa7fMvmfGl3meFNcpQZ4Yz67C34TP5qmqS4vadKHu45kQ4mVJbJ3nA00Kj5aCKDl"
-PRICE_ID = "price_1TO7YeBgrmpYhuw1PwxOXJTN"
-
-#PRICE_ID = st.secrets["PRICE_MONTHLY"]
-SUCCESS_URL = "http://localhost:8501/?success=true"
-CANCEL_URL = "http://localhost:8501/?canceled=true"
+stripe.api_key = st.secrets["STRIPE_SECRET_KEY"]
+PRICE_ID = st.secrets["PRICE_ID"]
+SUCCESS_URL = st.secrets["SUCCESS_URL"]
+CANCEL_URL = st.secrets["CANCEL_URL"]
 
 USER_FILE = "users.json"
 
@@ -60,7 +56,16 @@ def login(username, password):
     return username in users and users[username]["password"] == password
 
 # =============================
-# HELPERS
+def reset_password(username, new_password):
+    users = load_users()
+
+    if username not in users:
+        return False
+
+    users[username]["password"] = new_password
+    save_users(users)
+
+    return True
 # =============================
 def extract_text_from_pdf(file):
     text = ""
@@ -115,12 +120,14 @@ if not st.session_state.user:
 ✔ AI Resume Rewrite  
 """)
 
-    menu = st.radio("Choose", ["Login", "Register"])
+    menu = st.radio("Choose", ["Login", "Register", "Reset Password"])
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
     if menu == "Login":
+    if menu == "Login":
+
         if st.button("Login"):
             if login(username, password):
                 st.session_state.user = username
@@ -128,15 +135,24 @@ if not st.session_state.user:
             else:
                 st.error("Invalid credentials")
 
-    else:
+    elif menu == "Register":
+
         if st.button("Register"):
             if register(username, password):
                 st.success("Registered! Please login")
             else:
                 st.error("User already exists")
 
-    st.stop()
+    elif menu == "Reset Password":
 
+        new_password = st.text_input("New Password", type="password")
+
+        if st.button("Reset Password"):
+            if reset_password(username, new_password):
+                st.success("Password updated successfully!")
+            else:
+                st.error("Username not found")
+    st.stop()
 # =============================
 # USER DATA
 # =============================
