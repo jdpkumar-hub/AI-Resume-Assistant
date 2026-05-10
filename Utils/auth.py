@@ -1,5 +1,3 @@
-# 📄 STEP 6 — Create utils/auth.py
-
 from supabase import create_client
 import streamlit as st
 
@@ -8,10 +6,10 @@ supabase = create_client(
     st.secrets["SUPABASE_KEY"]
 )
 
-# ==========================
+# ======================================
 # REGISTER
-# ==========================
-def register_user(username, password):
+# ======================================
+def register_user(username, email, password):
 
     existing = supabase.table("users") \
         .select("*") \
@@ -23,6 +21,7 @@ def register_user(username, password):
 
     supabase.table("users").insert({
         "username": username,
+        "email": email,
         "password": password,
         "is_admin": False,
         "is_pro": False,
@@ -31,9 +30,9 @@ def register_user(username, password):
 
     return True
 
-# ==========================
+# ======================================
 # LOGIN
-# ==========================
+# ======================================
 def login_user(username, password):
 
     result = supabase.table("users") \
@@ -47,9 +46,9 @@ def login_user(username, password):
 
     return None
 
-# ==========================
+# ======================================
 # RESET PASSWORD
-# ==========================
+# ======================================
 def reset_password(username, new_password):
 
     result = supabase.table("users") \
@@ -58,22 +57,3 @@ def reset_password(username, new_password):
         .execute()
 
     return True
-
-# ==========================
-# GET ALL USERS
-# ==========================
-def get_all_users():
-    return supabase.table("users").select("*").execute().data
-
-
- 
-
----
-
-
----
-
-
-
-
-
