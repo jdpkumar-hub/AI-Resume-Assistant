@@ -1,6 +1,3 @@
-# Full Clean app.py (Fixed Tabs + No Separate Buttons)
-
-```python
 import streamlit as st
 
 # ==========================================
@@ -280,4 +277,4 @@ if st.session_state.user:
     if st.button("Logout", key="logout_btn"):
         st.session_state.user = None
         st.rerun()
-```
+
