@@ -1,9 +1,7 @@
+# Full Clean app.py (Fixed Tabs + No Separate Buttons)
+
+```python
 import streamlit as st
-from utils.auth import (
-    register_user,
-    login_user,
-    reset_password
-)
 
 # ==========================================
 # PAGE CONFIG
@@ -19,25 +17,20 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Main background */
 [data-testid="stAppViewContainer"] {
     background: linear-gradient(to right, #f8fafc, #eef2ff);
 }
 
-/* Reduce top spacing */
 .block-container {
-    padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-top: 1.5rem;
 }
 
-/* Column spacing */
 [data-testid="column"] {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
-/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 25px;
+    gap: 20px;
 }
 
 .stTabs [data-baseweb="tab"] {
@@ -45,7 +38,6 @@ st.markdown("""
     font-weight: 600;
 }
 
-/* Buttons */
 .stButton button {
     background-color: #2563eb;
     color: white;
@@ -61,12 +53,10 @@ st.markdown("""
     color: white;
 }
 
-/* Inputs */
 .stTextInput input {
     border-radius: 10px;
 }
 
-/* Hide Streamlit menu/footer */
 #MainMenu {
     visibility: hidden;
 }
@@ -83,26 +73,40 @@ header {
 """, unsafe_allow_html=True)
 
 # ==========================================
-# SESSION STATE
+# SESSION
 # ==========================================
 if "user" not in st.session_state:
     st.session_state.user = None
 
+# ==========================================
+# DEMO AUTH
+# Replace later with Supabase
+# ==========================================
+def login(username, password):
+    return username == "admin" and password == "admin"
+
+
+def register(username, email, password):
+    return True
+
+
+def reset_password(username, new_password):
+    return True
 
 # ==========================================
-# LAYOUT
+# MAIN LAYOUT
 # ==========================================
-left, right = st.columns([1, 2.2])
+left, right = st.columns([1, 2])
 
 # ==========================================
 # LEFT PANEL
 # ==========================================
 with left:
 
-    st.image("images/logo.png", width=140)
+    st.image("images/logo.png", width=120)
 
     st.markdown("""
-    <h1 style='margin-bottom:0;color:#111827;'>
+    <h1 style='margin-bottom:0;'>
     AI Resume Assistant
     </h1>
     """, unsafe_allow_html=True)
@@ -112,60 +116,28 @@ with left:
     🚀 Smart Career Optimization
     </p>
     """, unsafe_allow_html=True)
-# ==========================================
-# DUMMY AUTH FUNCTIONS
-# Replace later with Supabase
-# ==========================================
-if st.button("Login"):
 
-    user = login_user(username, password)
-
-    if user:
-        st.session_state.user = user
-        st.success("Login successful ✅")
-        st.rerun()
-
-    else:
-        st.error("Invalid credentials")
-        
-
-if st.button("Create Account"):
-
-    if register_user(
-        reg_user,
-        reg_email,
-        reg_pass
-    ):
-        st.success("Registration successful ✅")
-
-    else:
-        st.error("User already exists")
-        
-        
-if st.button("Reset Password"):
-
-    if reset_password(reset_user, reset_pass):
-        st.success("Password updated ✅")
-
-    else:
-        st.error("User not found")
     st.markdown("---")
 
     st.markdown("""
     ### ✨ Features
 
-    ✔ ATS Score Checker  
-    ✔ Resume Rewrite  
-    ✔ Interview Questions  
-    ✔ PDF Export  
-    ✔ AI Optimization  
-    ✔ Resume Templates  
+    ✔ ATS Score Checker
+
+    ✔ Resume Rewrite
+
+    ✔ Interview Questions
+
+    ✔ PDF Export
+
+    ✔ AI Optimization
+
+    ✔ Resume Templates
     """)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     st.markdown("---")
-
 
     st.caption("Built by JDP Kumar 🚀")
 
@@ -174,18 +146,21 @@ if st.button("Reset Password"):
 # ==========================================
 with right:
 
-    st.markdown("""
-    <h1 style='text-align:center;color:#111827;'>
-    🤖 AI Resume Assistant
-    </h1>
-    """, unsafe_allow_html=True)
+    st.markdown(
+        """
+        <h1 style='text-align:center;'>
+        🤖 AI Resume Assistant
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown("<br>", unsafe_allow_html=True)
 
     # ======================================
     # TABS
     # ======================================
-    tab1, tab2, tab3 = st.tabs([
+    login_tab, signup_tab, reset_tab = st.tabs([
         "🔐 Login",
         "🆕 Signup",
         "🔑 Reset"
@@ -194,16 +169,16 @@ with right:
     # ======================================
     # LOGIN TAB
     # ======================================
-    with tab1:
+    with login_tab:
 
         st.markdown("### Welcome Back 👋")
 
-        username = st.text_input(
-            "Email / Username",
+        login_user = st.text_input(
+            "Username",
             key="login_user"
         )
 
-        password = st.text_input(
+        login_pass = st.text_input(
             "Password",
             type="password",
             key="login_pass"
@@ -211,22 +186,19 @@ with right:
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        if st.button("Login"):
+        if st.button("Login", key="login_btn"):
 
-            if login(username, password):
-                st.session_state.user = username
+            if login(login_user, login_pass):
+                st.session_state.user = login_user
                 st.success("Login successful ✅")
+                st.rerun()
             else:
                 st.error("Invalid credentials")
 
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.info("Demo Login → admin / admin")
-
     # ======================================
-    # REGISTER TAB
+    # SIGNUP TAB
     # ======================================
-    with tab2:
+    with signup_tab:
 
         st.markdown("### Create Account 🚀")
 
@@ -248,17 +220,20 @@ with right:
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        if st.button("Create Account"):
+        if st.button(
+            "Create Account",
+            key="register_btn"
+        ):
 
-            if register(reg_user, reg_pass):
+            if register(reg_user, reg_email, reg_pass):
                 st.success("Registration successful ✅")
             else:
                 st.error("User already exists")
 
     # ======================================
-    # RESET PASSWORD TAB
+    # RESET TAB
     # ======================================
-    with tab3:
+    with reset_tab:
 
         st.markdown("### Reset Password 🔑")
 
@@ -275,7 +250,10 @@ with right:
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        if st.button("Reset Password"):
+        if st.button(
+            "Reset Password",
+            key="reset_btn"
+        ):
 
             if reset_password(reset_user, reset_pass):
                 st.success("Password updated ✅")
@@ -289,10 +267,17 @@ if st.session_state.user:
 
     st.markdown("---")
 
-    st.success(f"Welcome {st.session_state.user} 🚀")
+    st.success(
+        f"Welcome {st.session_state.user} 🚀"
+    )
 
-    st.write("Your dashboard will appear here.")
+    st.subheader("📄 Dashboard")
 
-    if st.button("Logout"):
+    st.info(
+        "Resume upload, ATS analysis, and AI tools will appear here."
+    )
+
+    if st.button("Logout", key="logout_btn"):
         st.session_state.user = None
         st.rerun()
+```
