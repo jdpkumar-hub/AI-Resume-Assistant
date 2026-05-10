@@ -82,6 +82,19 @@ with left:
 
     st.caption("© 2026 AI Resume Assistant")
 #==========================================
+st.markdown("""
+<style>
+[data-testid="column"] {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.stRadio > div {
+    gap: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
     
 with right:
 
