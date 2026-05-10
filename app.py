@@ -34,10 +34,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+# =============================
+# LAYOUT
+# =============================
+left, right = st.columns([1, 3])
+
 # ================= LEFT PANEL =================
 with left:
-    st.image("images/logo.png", width=160)
-     st.markdown("## AI Resume")
+
+    st.image("images/logo.png", width=120)
+
+    st.markdown("# 🚀 AI Resume")
     st.markdown("### Assistant")
 
     st.markdown("---")
@@ -52,9 +59,28 @@ with left:
     st.markdown("""
 ### ✨ Features
 
-✔ ATS Score  
+✔ ATS Score Checker  
 ✔ Resume Rewrite  
 ✔ Interview Questions  
 ✔ PDF Download  
 ✔ AI Optimization  
+✔ Resume Templates  
 """)
+
+    st.markdown("---")
+
+    st.markdown("""
+### 💎 Plans
+
+🆓 Free Plan  
+- 3 Resume Analyses
+
+🚀 Pro Plan  
+- Unlimited Usage  
+- Premium ATS  
+- Faster AI
+""")
+
+    st.markdown("---")
+
+    st.caption("© 2026 AI Resume Assistant")
