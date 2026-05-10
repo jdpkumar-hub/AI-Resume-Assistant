@@ -126,7 +126,6 @@ if not st.session_state.user:
     password = st.text_input("Password", type="password")
 
     if menu == "Login":
-    if menu == "Login":
 
         if st.button("Login"):
             if login(username, password):
