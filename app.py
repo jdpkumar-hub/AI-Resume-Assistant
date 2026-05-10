@@ -1,7 +1,5 @@
 import streamlit as st
 
-st.set_page_config(page_title="AI Resume Assistant", layout="wide")
-
 st.title("🚀 AI Resume Assistant")
 
 # =============================
