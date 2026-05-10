@@ -103,9 +103,9 @@ with left:
     st.image("images/logo.png", width=120)
 
     st.markdown("""
-    <h2 style='margin-bottom:0;'>
+    <h3 style='margin-bottom:0;'>
     AI Resume Assistant
-    </h2>
+    </h3>
     """, unsafe_allow_html=True)
 
     st.markdown("""
@@ -141,7 +141,7 @@ with right:
     st.markdown(
         """
         <h1 style='text-align:center;'>
-        🤖 AI Resume Assistant
+         AI Resume Assistant
         </h1>
         """,
         unsafe_allow_html=True
